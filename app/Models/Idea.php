@@ -16,7 +16,7 @@ class Idea extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
+        'content',
         'impact',
         'ease',
         'confidence',

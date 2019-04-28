@@ -61,5 +61,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
             }
             return false;
         }
+
+        return false;
     }
 }

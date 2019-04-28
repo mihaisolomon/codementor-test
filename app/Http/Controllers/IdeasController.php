@@ -76,6 +76,18 @@ class IdeasController extends Controller
 
     public function destroy(Request $request, $idea_id)
     {
-        $this->ideasRepository->delete($idea_id);
+        $user = \Auth::user();
+
+        $response = $this->ideasRepository->delete([
+            'id' => $idea_id,
+            'user' => $user
+        ]);
+
+        if($response) {
+            return response()->json(['success' => true], 200);
+        }
+
+        return response()->json(['success' => false], 422);
+
     }
 }

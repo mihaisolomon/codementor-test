@@ -16,7 +16,7 @@ $router->post("access-token/refresh", ["uses" => "Auth\AuthController@refresh"])
 $router->post("register", ["uses" => "Auth\RegisterController@register"]);
 
 $router->get('/me', [
-    'middleware' => 'jwt.auth',
+    //'middleware' => 'jwt.auth',
     'uses' => 'ProfileController@me'
 ]);
 

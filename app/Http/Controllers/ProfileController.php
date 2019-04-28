@@ -18,9 +18,6 @@ class ProfileController extends Controller
     {
         $user = \Auth::user();
 
-        if(!$user) {
-            return response()->json(['missing_token'], 401);
-        }
 
         return $user;
     }

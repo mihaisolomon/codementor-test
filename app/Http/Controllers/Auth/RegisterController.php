@@ -35,5 +35,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->get('password')),
             'avatar' => Gravatar::avatar($request->get('email'))
         ]);
+
+        return response()->json(['success' => true], 200);
     }
 }

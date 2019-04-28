@@ -53,7 +53,7 @@ class IdeasController extends Controller
             'ease' => $request->get('ease'),
             'confidence' => $request->get('confidence'),
             //'average_score' => $avg
-            'average' => $avg
+            'average_score' => $avg
         ]);
 
         return response()->json($data, 201);

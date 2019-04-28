@@ -16,11 +16,11 @@ class IdeeasTable extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('name');
-            $table->integer('impact');
-            $table->integer('ease');
-            $table->integer('confidence');
-            $table->decimal('average');
+            $table->string('content');
+            $table->integer('impact')->default(0);
+            $table->integer('ease')->default(0);
+            $table->integer('confidence')->default(0);
+            $table->decimal('average_score')->default(0);
 
             $table->foreign('user_id')
                 ->references('id')

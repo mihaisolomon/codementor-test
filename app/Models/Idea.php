@@ -20,7 +20,7 @@ class Idea extends Model
         'impact',
         'ease',
         'confidence',
-        'average'
+        'average_score'
     ];
 
     protected $hidden = ['updated_at', 'user_id'];

@@ -25,12 +25,20 @@ class IdeasController extends Controller
     {
         $user = \Auth::user();
 
+        if(!$user) {
+            return response()->json(['missing_token'], 401);
+        }
+
         return $this->ideasRepository->getPaginated($user);
     }
 
     public function store(Request $request)
     {
         $user = \Auth::user();
+
+        if(!$user) {
+            return response()->json(['missing_token'], 401);
+        }
 
         $notes = $request->get('ease') +
             $request->get('confidence') +
@@ -54,6 +62,10 @@ class IdeasController extends Controller
     public function update(Request $request, $idea_id)
     {
         $user = \Auth::user();
+
+        if(!$user) {
+            return response()->json(['missing_token'], 401);
+        }
 
         $params = $request->all();
 

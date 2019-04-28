@@ -16,6 +16,12 @@ class ProfileController extends Controller
 
     public function me()
     {
-        return \Auth::user();
+        $user = \Auth::user();
+
+        if(!$user) {
+            return response()->json(['missing_token'], 401);
+        }
+
+        return $user;
     }
 }

@@ -30,6 +30,14 @@ class IdeasController extends Controller
 
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'content' => 'required',
+            'impact' => 'required',
+            'ease' => 'required',
+            'confidence' => 'required'
+        ]);
+
         $user = \Auth::user();
 
         $notes = $request->get('ease') +
@@ -40,7 +48,7 @@ class IdeasController extends Controller
 
         $data = $this->ideasRepository->create([
             'user_id' => $user->id,
-            'name' => $request->get('name'),
+            'content' => $request->get('name'),
             'impact' => $request->get('impact'),
             'ease' => $request->get('ease'),
             'confidence' => $request->get('confidence'),

@@ -48,7 +48,7 @@ class IdeasController extends Controller
 
         $data = $this->ideasRepository->create([
             'user_id' => $user->id,
-            'content' => $request->get('name'),
+            'content' => $request->get('content'),
             'impact' => $request->get('impact'),
             'ease' => $request->get('ease'),
             'confidence' => $request->get('confidence'),

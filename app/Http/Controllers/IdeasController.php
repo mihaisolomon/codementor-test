@@ -40,11 +40,7 @@ class IdeasController extends Controller
 
         $user = \Auth::user();
 
-        $notes = $request->get('ease') +
-            $request->get('confidence') +
-            $request->get('impact');
-
-        $avg =  $notes / 3;
+        $avg = $this->calculateAvg($request);
 
         $data = $this->ideasRepository->create([
             'user_id' => $user->id,
@@ -65,7 +61,10 @@ class IdeasController extends Controller
 
         $params = $request->all();
 
+        $avg = $this->calculateAvg($request);
+
         $params['user'] = $user;
+        $params['average_score'] = $avg;
 
         if($idea = $this->ideasRepository->update($params, $idea_id)) {
             return response()->json($idea, 200);
@@ -89,5 +88,16 @@ class IdeasController extends Controller
 
         return response()->json(['success' => false], 422);
 
+    }
+
+    private function calculateAvg(Request $request)
+    {
+        $notes = $request->get('ease') +
+            $request->get('confidence') +
+            $request->get('impact');
+
+        $avg =  $notes / 3;
+
+        return number_format($avg,2);
     }
 }

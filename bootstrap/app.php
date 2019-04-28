@@ -21,9 +21,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +61,11 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+ ]);
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +79,22 @@ $app->singleton(
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+
+$app->configure('session');
+$app->bind(Illuminate\Session\SessionManager::class, function ($app) {
+    return $app->make('session');
+});
+$app->middleware([
+    'Illuminate\Session\Middleware\StartSession'
+]);
+$app->register(Illuminate\Session\SessionServiceProvider::class);
+$app->singleton('cookie', function () use ($app) {
+    return $app->loadComponent('session', 'Illuminate\Cookie\CookieServiceProvider', 'cookie');
+});
+$app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

@@ -75,6 +75,10 @@ class IdeasController extends Controller
 
     public function update(Request $request, $idea_id)
     {
+        if(!ctype_digit($idea_id)) {
+            return response()->json(['success' => false], 422);
+        }
+
         $user = \Auth::user();
 
         $params = $request->all();
@@ -94,6 +98,10 @@ class IdeasController extends Controller
     public function destroy(Request $request, $idea_id)
     {
         $user = \Auth::user();
+
+        if(!ctype_digit($idea_id)) {
+            return response()->json(['success' => false], 422);
+        }
 
         $response = $this->ideasRepository->delete([
             'id' => $idea_id,

@@ -32,6 +32,10 @@ $router->post('/ideas', [
     'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@store'
 ]);
+$router->get('/ideas/{idea_id}', [
+    'middleware' => 'jwt.auth.custom',
+    'uses' => 'IdeasController@show'
+]);
 $router->put('/ideas/{idea_id}', [
     'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@update'

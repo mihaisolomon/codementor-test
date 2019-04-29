@@ -28,6 +28,24 @@ class IdeasController extends Controller
         return $this->ideasRepository->getPaginated($user);
     }
 
+    public function show(Request $request, $idea_id)
+    {
+        $user = \Auth::user();
+
+        if(!ctype_digit($idea_id)) {
+            return response()->json(['success' => false], 422);
+        }
+
+        $idea = $this->ideasRepository->find($idea_id);
+
+        if($user->id !== $idea->user_id) {
+            return response()->json(['success' => false], 422);
+        }
+
+        return response()->json($idea, 200);
+
+    }
+
     public function store(Request $request)
     {
 

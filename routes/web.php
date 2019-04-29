@@ -15,23 +15,23 @@ $router->post("access-token/refresh", ["uses" => "Auth\AuthController@refresh"])
 $router->post("register", ["uses" => "Auth\RegisterController@register"]);
 
 $router->get('/me', [
-    'middleware' => 'jwt.auth',
+    'middleware' => 'jwt.auth.custom',
     'uses' => 'ProfileController@me'
 ]);
 
 $router->get('/ideas', [
-    'middleware' => 'jwt.auth',
+    'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@index'
 ]);
 $router->post('/ideas', [
-    'middleware' => 'jwt.auth',
+    'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@store'
 ]);
 $router->put('/ideas/{idea_id}', [
-    'middleware' => 'jwt.auth',
+    'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@update'
 ]);
 $router->delete('/ideas/{idea_id}', [
-    'middleware' => 'jwt.auth',
+    'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@destroy'
 ]);

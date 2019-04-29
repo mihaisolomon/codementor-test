@@ -19,6 +19,11 @@ $router->get('/me', [
     'uses' => 'ProfileController@me'
 ]);
 
+$router->get('/', [
+    'middleware' => 'jwt.auth.custom',
+    'uses' => 'ProfileController@me'
+]);
+
 $router->get('/ideas', [
     'middleware' => 'jwt.auth.custom',
     'uses' => 'IdeasController@index'

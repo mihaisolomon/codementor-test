@@ -41,13 +41,13 @@ abstract class BaseMiddleware
      *
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      *
-     * @return void
+     * @return array
      */
     public function checkForToken(Request $request)
     {
         if (! $this->auth->parser()->setRequest($request)->hasToken()) {
 
-            return response()->json(['message' => 'Token not provided', 'success' => false], 401);
+            return ['message' => 'Token not provided', 'success' => false];
 
             //throw new UnauthorizedHttpException('jwt-auth', 'Token not provided');
         }
@@ -60,7 +60,7 @@ abstract class BaseMiddleware
      *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      *
-     * @return void
+     * @return array
      */
     public function authenticate(Request $request)
     {
@@ -69,11 +69,12 @@ abstract class BaseMiddleware
         try {
             if (! $this->auth->parseToken()->authenticate()) {
                 //throw new UnauthorizedHttpException('jwt-auth', 'User not found');
-                return response()->json(['message' => 'User not found', 'success' => false], 401);
+                return ['message' => 'User not found', 'success' => false];
 
             }
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage(), 'success' => false], $e->getCode());
+
+            return ['message' => $e->getMessage(), 'success' => false];
 
             //throw new UnauthorizedHttpException('jwt-auth', $e->getMessage(), $e, $e->getCode());
         }

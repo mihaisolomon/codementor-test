@@ -24,7 +24,11 @@ class JWTAuthenticate extends BaseMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $this->authenticate($request);
+        $response = $this->authenticate($request);
+
+        if(isset($response['success']) && !$response['success']) {
+            return response()->json($response, 401);
+        }
 
         return $next($request);
     }

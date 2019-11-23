@@ -94,7 +94,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         }
     }
 
-    public function delete($id)
+    public function newDelete($id)
     {
         if (is_array($id)) {
             $idea = $this->find($id['id']);

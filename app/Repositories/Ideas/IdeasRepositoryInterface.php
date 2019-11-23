@@ -18,4 +18,5 @@ interface IdeasRepositoryInterface extends BaseRepositoryInterface
     public function newFind($id);
     public function newCreate(array $attributes);
     public function newUpdate(array $attributes, $id);
+    public function newDelete($id);
 }

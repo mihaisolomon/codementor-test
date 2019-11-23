@@ -113,7 +113,7 @@ class IdeasController extends Controller
             return response()->json(['success' => false], 422);
         }
 
-        $response = $this->ideasRepository->delete([
+        $response = $this->ideasRepository->newDelete([
             'id' => $idea_id,
             'user' => $user
         ]);

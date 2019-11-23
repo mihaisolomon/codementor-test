@@ -61,6 +61,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         $idea = $this->create($attributes);
 
         return [
+            'id' => $idea->id,
             'content' => $idea->content,
             'impact' => floatval($idea->impact),
             'ease' => floatval($idea->ease),

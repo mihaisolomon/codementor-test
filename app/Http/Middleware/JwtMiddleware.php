@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\JwtServiceInterface;
+use App\Services\JWT\JwtServiceInterface;
 use Closure;
 
 class JwtMiddleware

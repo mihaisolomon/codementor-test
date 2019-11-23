@@ -1,8 +1,9 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\JWT;
 
+use App\Services\Gravatar;
 use App\Services\Users\UserServiceInterface;
 use App\User;
 use Firebase\JWT\JWT;

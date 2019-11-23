@@ -23,14 +23,14 @@ class IdeasController extends Controller
 
     public function index(Request $request)
     {
-        $user = \Auth::user();
+        $user = $request->auth;
 
         return $this->ideasRepository->getPaginated($user);
     }
 
     public function show(Request $request, $idea_id)
     {
-        $user = \Auth::user();
+        $user = $request->auth;
 
         if(!ctype_digit($idea_id)) {
             return response()->json(['success' => false], 422);
@@ -56,7 +56,7 @@ class IdeasController extends Controller
             'confidence' => 'required'
         ]);
 
-        $user = \Auth::user();
+        $user = $request->auth;
 
         $avg = $this->calculateAvg($request);
 
@@ -79,7 +79,7 @@ class IdeasController extends Controller
             return response()->json(['success' => false], 422);
         }
 
-        $user = \Auth::user();
+        $user = $request->auth;
 
         $params = $request->all();
 
@@ -97,7 +97,7 @@ class IdeasController extends Controller
 
     public function destroy(Request $request, $idea_id)
     {
-        $user = \Auth::user();
+        $user = $request->auth;
 
         if(!ctype_digit($idea_id)) {
             return response()->json(['success' => false], 422);

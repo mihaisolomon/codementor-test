@@ -74,21 +74,21 @@ class IdeasController extends Controller
 
     public function update(Request $request, $idea_id)
     {
-
-        \Log::info($idea_id);
-
+        \Log::info('Here 1');
         if(!ctype_digit($idea_id)) {
             return response("false", 422);
         }
 
         try {
+            \Log::info('Here 11');
             $idea = $this->ideasRepository->findOneOrFail($idea_id);
         } catch (\Exception $exception) {
+            \Log::info('Here 111');
             return response("false", 422);
         }
 
         $user = $request->auth;
-
+        \Log::info('Here 11111');
         $params = $request->all();
 
         $avg = $this->calculateAvg($request);
@@ -97,6 +97,7 @@ class IdeasController extends Controller
         $params['average_score'] = $avg;
 
         if($idea = $this->ideasRepository->newUpdate($params, $idea_id)) {
+            \Log::info('Here 111111');
             return response()->json($idea, 200);
         }
 

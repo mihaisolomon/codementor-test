@@ -59,7 +59,7 @@ class IdeasController extends Controller
 
         $avg = $this->calculateAvg($request);
 
-        $data = $this->ideasRepository->create([
+        $data = $this->ideasRepository->newCreate([
             'user_id' => $user->id,
             'content' => $request->get('content'),
             'impact' => $request->get('impact'),
@@ -96,7 +96,7 @@ class IdeasController extends Controller
         $params['user'] = $user;
         $params['average_score'] = $avg;
 
-        if($idea = $this->ideasRepository->update($params, $idea_id)) {
+        if($idea = $this->ideasRepository->newUpdate($params, $idea_id)) {
             return response()->json($idea, 200);
         }
 

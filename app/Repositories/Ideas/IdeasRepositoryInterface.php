@@ -14,4 +14,8 @@ use App\User;
 interface IdeasRepositoryInterface extends BaseRepositoryInterface
 {
     public function getPaginated(User $user);
+
+    public function newFind($id);
+    public function newCreate(array $attributes);
+    public function newUpdate(array $attributes, $id);
 }

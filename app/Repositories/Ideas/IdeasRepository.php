@@ -41,9 +41,9 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         return $aIdeas;
     }
 
-    public function find($id)
+    public function newFind($id)
     {
-        $idea = parent::find($id);
+        $idea = $this->find($id);
 
         return [
             'id' => $idea->id,
@@ -56,9 +56,9 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         ];
     }
 
-    public function create(array $attributes)
+    public function newCreate(array $attributes)
     {
-        $idea = parent::create($attributes);
+        $idea = $this->create($attributes);
 
         return [
             'content' => $idea->content,
@@ -70,7 +70,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         ];
     }
 
-    public function update(array $attributes, $id)
+    public function newUpdate(array $attributes, $id)
     {
         $idea = $this->find($id);
 
@@ -83,11 +83,11 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
 
             unset($attributes['user']);
 
-            if ($user->id !== $idea->user_id) {
+            if ($user->id !== $idea['user_id']) {
                 return false;
             }
 
-            $idea->update($attributes);
+            $this->update($attributes, $idea['user_id']);
 
             return $idea;
         }

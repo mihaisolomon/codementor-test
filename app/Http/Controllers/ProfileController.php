@@ -8,15 +8,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class ProfileController extends Controller
 {
     public function __construct()
     {
     }
 
-    public function me()
+    public function me(Request $request)
     {
-        $user = \Auth::user();
+        $user = $request->auth;
 
 
         return $user;

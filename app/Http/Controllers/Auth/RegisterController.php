@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\Gravatar;
-use App\Services\JwtServiceInterface;
+use App\Services\Jwt\JwtServiceInterface;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;

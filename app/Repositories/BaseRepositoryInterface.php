@@ -13,6 +13,8 @@ interface BaseRepositoryInterface
 {
     public function create(array $attributes);
 
+    public function store(array $attributes);
+
     public function update(array $attributes, $id);
 
     public function all($columns = array('*'), $orderBy = 'id', $sortBy = 'desc');

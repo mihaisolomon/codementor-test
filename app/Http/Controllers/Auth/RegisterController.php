@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\Gravatar;
+use App\Services\JwtServiceInterface;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -20,9 +21,13 @@ class RegisterController extends Controller
 {
     protected $JWTAuth;
 
-    public function __construct(JWTAuth $JWTAuth)
+    protected $jwtService;
+
+    public function __construct(JWTAuth $JWTAuth, JwtServiceInterface $jwtService)
     {
         $this->JWTAuth = $JWTAuth;
+
+        $this->jwtService = $jwtService;
     }
 
     public function register(Request $request)
@@ -33,19 +38,7 @@ class RegisterController extends Controller
             'password'=> 'required'
         ]);
 
-        User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'avatar' => Gravatar::avatar($request->get('email'))
-        ]);
-
-        if (!$token = $this->JWTAuth->attempt([
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        ])) {
-            return response()->json(['user_not_found'], 401);
-        }
+        $token = $this->jwtService->createUser($request);
 
         return response()->json(['jwt' => $token, 'refresh_token' => $token], 201);
     }

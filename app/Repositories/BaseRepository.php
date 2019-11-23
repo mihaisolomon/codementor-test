@@ -36,6 +36,15 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     /**
      * @param array $attributes
+     * @return mixed
+     */
+    public function store(array $attributes)
+    {
+        return $this->model->create($attributes);
+    }
+
+    /**
+     * @param array $attributes
      * @param int $id
      * @return bool
      */

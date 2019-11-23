@@ -79,6 +79,12 @@ class IdeasController extends Controller
             return response()->json(['success' => false], 422);
         }
 
+        try {
+            $idea = $this->ideasRepository->findOneOrFail($idea_id);
+        } catch (\Exception $exception) {
+            return response()->json([], 422);
+        }
+        
         $user = $request->auth;
 
         $params = $request->all();
@@ -112,7 +118,7 @@ class IdeasController extends Controller
             return response()->json([], 204);
         }
 
-        return response()->json(['success' => false], 422);
+        return response()->json([], 422);
 
     }
 

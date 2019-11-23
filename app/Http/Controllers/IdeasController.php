@@ -97,7 +97,7 @@ class IdeasController extends Controller
         $params['average_score'] = $avg;
 
         if($idea = $this->ideasRepository->newUpdate($params, $idea_id)) {
-            return response()->json($idea, 200);
+            return response()->json(true, 200);
         }
 
         return response()->json(['success' => false], 422);

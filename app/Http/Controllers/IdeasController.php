@@ -119,10 +119,10 @@ class IdeasController extends Controller
         ]);
 
         if($response) {
-            return response('',204);
+            return response('204',204);
         }
 
-        return response('', 422);
+        return response('422', 422);
 
     }
 

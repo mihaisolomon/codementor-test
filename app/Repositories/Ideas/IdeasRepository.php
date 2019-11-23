@@ -80,13 +80,13 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         }
 
         if (isset($attributes['user'])) {
-            $user = $attributes['user'];
+//            $user = $attributes['user'];
 
             unset($attributes['user']);
 
-            if ($user->id !== $idea['user_id']) {
-                return false;
-            }
+//            if ($user->id !== $idea['user_id']) {
+//                return false;
+//            }
 
             $idea = $this->update($attributes, $idea->id);
 

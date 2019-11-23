@@ -64,7 +64,7 @@ class JwtService implements JwtServiceInterface
                 'code' => 400];
         } catch (\Exception $e) {
             return [
-                'error' => 'An error while decoding token.',
+                'message' => 'An error while decoding token.',
                 'code' => 400];
         }
 

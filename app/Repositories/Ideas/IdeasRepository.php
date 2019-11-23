@@ -24,7 +24,20 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         $ideas = $this->model
             ->where('user_id', $user->id)
             ->paginate(10);
-        return $ideas;
+
+        $aIdeas = [];
+        foreach ($ideas as $idea) {
+            $aIdeas[] = [
+                'content' => $idea->content,
+                'impact' => floatval($idea->impact),
+                'ease' => floatval($idea->ease),
+                'confidence' => floatval($idea->confidence),
+                'average_score' => floatval($idea->average_score),
+                'created_at'
+            ];
+        }
+
+        return $aIdeas;
     }
 
     public function update(array $attributes, $id)

@@ -109,7 +109,7 @@ class IdeasController extends Controller
         ]);
 
         if($response) {
-            return response()->json(['success' => true], 200);
+            return response()->json([], 204);
         }
 
         return response()->json(['success' => false], 422);

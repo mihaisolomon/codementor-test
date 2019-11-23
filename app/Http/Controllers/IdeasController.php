@@ -117,10 +117,10 @@ class IdeasController extends Controller
         ]);
 
         if($response) {
-            return response()->json([], 204);
+            return response()->json(['dddd'], 204);
         }
 
-        return response()->json([], 422);
+        return response()->json(['wwwww'], 422);
 
     }
 

@@ -61,6 +61,10 @@ $app->singleton(
      \Spatie\HttpLogger\Middlewares\HttpLogger::class
  ]);
 
+ $app->middleware([
+     \App\Http\Middleware\HeadersLoggerMiddleware::class
+ ]);
+
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);

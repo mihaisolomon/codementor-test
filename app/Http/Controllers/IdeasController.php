@@ -48,7 +48,6 @@ class IdeasController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'content' => 'required',
             'impact' => 'required',
@@ -75,6 +74,9 @@ class IdeasController extends Controller
 
     public function update(Request $request, $idea_id)
     {
+
+        \Log::info($idea_id);
+
         if(!ctype_digit($idea_id)) {
             return response()->json(['success' => false], 422);
         }
@@ -84,7 +86,7 @@ class IdeasController extends Controller
         } catch (\Exception $exception) {
             return response()->json([], 422);
         }
-        
+
         $user = $request->auth;
 
         $params = $request->all();

@@ -88,7 +88,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
                 return false;
             }
 
-            $this->update($attributes, $idea['user_id']);
+            $idea = $this->update($attributes, $idea->id);
 
             return $idea;
         }

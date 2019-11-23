@@ -33,11 +33,39 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
                 'ease' => floatval($idea->ease),
                 'confidence' => floatval($idea->confidence),
                 'average_score' => floatval($idea->average_score),
-                'created_at'
+                'created_at' => $idea->created_at
             ];
         }
 
         return $aIdeas;
+    }
+
+    public function find($id)
+    {
+        $idea = parent::find($id);
+
+        return [
+            'content' => $idea->content,
+            'impact' => floatval($idea->impact),
+            'ease' => floatval($idea->ease),
+            'confidence' => floatval($idea->confidence),
+            'average_score' => floatval($idea->average_score),
+            'created_at' => $idea->created_at
+        ];
+    }
+
+    public function create(array $attributes)
+    {
+        $idea = parent::create($attributes);
+
+        return [
+            'content' => $idea->content,
+            'impact' => floatval($idea->impact),
+            'ease' => floatval($idea->ease),
+            'confidence' => floatval($idea->confidence),
+            'average_score' => floatval($idea->average_score),
+            'created_at' => $idea->created_at
+        ];
     }
 
     public function update(array $attributes, $id)

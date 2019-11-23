@@ -22,7 +22,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
     public function getPaginated(User $user)
     {
         $ideas = $this->model
-            //->where('user_id', $user->id)
+            ->where('user_id', $user->id)
             ->paginate(10);
 
         $aIdeas = [];
@@ -98,12 +98,12 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
     {
         if (is_array($id)) {
             $idea = $this->find($id['id']);
-            if(is_null($idea)) {
+            if (is_null($idea)) {
                 return false;
             }
 //            if(isset($id['user']) && $idea->user_id === $id['user']->id) {
-                $idea->delete();
-                return true;
+            $idea->delete();
+            return true;
 //            }
 //            return false;
         }

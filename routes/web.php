@@ -13,6 +13,7 @@
 $router->post("access-token", ["uses" => "Auth\AuthController@login"]);
 $router->post("access-token/refresh", ["uses" => "Auth\AuthController@refresh"]);
 $router->post("register", ["uses" => "Auth\RegisterController@register"]);
+$router->post("users", ["uses" => "Auth\RegisterController@register"]);
 
 $router->get('/me', [
     'middleware' => 'jwt.auth.custom',

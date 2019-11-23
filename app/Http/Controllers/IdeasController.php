@@ -78,7 +78,7 @@ class IdeasController extends Controller
         \Log::info($idea_id);
 
         if(!ctype_digit($idea_id)) {
-            return response()->json(['success' => false], 422);
+            return response()->json(false, 422);
         }
 
         try {
@@ -100,7 +100,7 @@ class IdeasController extends Controller
             return response()->json(true, 200);
         }
 
-        return response()->json(['success' => false], 422);
+        return response()->json(false, 422);
     }
 
     public function destroy(Request $request, $idea_id)

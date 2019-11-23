@@ -140,4 +140,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->find($id)->delete();
     }
+
+    /**
+     * show the record with the given id
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|Model
+     */
+    public function show($id)
+    {
+        return $this->model->findOrFail($id);
+    }
 }

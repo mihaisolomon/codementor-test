@@ -78,13 +78,13 @@ class IdeasController extends Controller
         \Log::info($idea_id);
 
         if(!ctype_digit($idea_id)) {
-            return response()->json(false, 422);
+            return response("false", 422);
         }
 
         try {
             $idea = $this->ideasRepository->findOneOrFail($idea_id);
         } catch (\Exception $exception) {
-            return response()->json(false, 422);
+            return response("false", 422);
         }
 
         $user = $request->auth;
@@ -100,7 +100,7 @@ class IdeasController extends Controller
             return response("true", 200);
         }
 
-        return response()->json(false, 422);
+        return response("false", 422);
     }
 
     public function destroy(Request $request, $idea_id)

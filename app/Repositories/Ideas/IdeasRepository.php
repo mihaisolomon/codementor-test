@@ -90,7 +90,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
 
             $idea = $this->update($attributes, $idea->id);
 
-            return $this->find($id);
+            return $this->newFind($id);
         }
     }
 

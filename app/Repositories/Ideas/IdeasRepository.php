@@ -22,7 +22,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
     public function getPaginated(User $user)
     {
         $ideas = $this->model
-            ->where('user_id', $user->id)
+            //->where('user_id', $user->id)
             ->paginate(10);
 
         $aIdeas = [];

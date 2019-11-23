@@ -28,6 +28,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         $aIdeas = [];
         foreach ($ideas as $idea) {
             $aIdeas[] = [
+                'id' => $idea->id,
                 'content' => $idea->content,
                 'impact' => floatval($idea->impact),
                 'ease' => floatval($idea->ease),
@@ -45,6 +46,7 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
         $idea = parent::find($id);
 
         return [
+            'id' => $idea->id,
             'content' => $idea->content,
             'impact' => floatval($idea->impact),
             'ease' => floatval($idea->ease),

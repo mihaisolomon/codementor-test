@@ -84,7 +84,7 @@ class IdeasController extends Controller
         try {
             $idea = $this->ideasRepository->findOneOrFail($idea_id);
         } catch (\Exception $exception) {
-            return response()->json([], 422);
+            return response()->json(false, 422);
         }
 
         $user = $request->auth;

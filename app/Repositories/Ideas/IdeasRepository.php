@@ -97,6 +97,9 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
     {
         if (is_array($id)) {
             $idea = $this->find($id['id']);
+            if(is_null($idea)) {
+                return false;
+            }
             if(isset($id['user']) && $idea->user_id === $id['user']->id) {
                 $idea->delete();
                 return true;

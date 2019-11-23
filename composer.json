@@ -9,6 +9,7 @@
         "illuminate/cookie": "^5.8",
         "illuminate/session": "^5.8",
         "laravel/lumen-framework": "5.8.*",
+        "spatie/laravel-http-logger": "^1.4",
         "vlucas/phpdotenv": "^3.3"
     },
     "require-dev": {

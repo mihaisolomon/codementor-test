@@ -71,7 +71,7 @@ $app->singleton(
 
 
 $app->routeMiddleware([
-    'jwt.auth.custom' => \App\Http\Middleware\JWTAuthenticate::class,
+    'jwt.auth.custom' => \App\Http\Middleware\JwtMiddleware::class,
 ]);
 
 

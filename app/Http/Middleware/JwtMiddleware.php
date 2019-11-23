@@ -33,7 +33,7 @@ class JwtMiddleware
         }
 
         $request->auth = $response['user'];
-        
+
         return $next($request);
     }
 }

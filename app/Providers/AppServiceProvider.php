@@ -17,19 +17,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/http-logger.php', 'http-logger');
     }
 
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/http-logger.php' => config_path('http-logger.php'),
-            ], 'config');
-        }
 
-        $this->app->singleton(LogProfile::class, config('http-logger.log_profile'));
-        $this->app->singleton(LogWriter::class, config('http-logger.log_writer'));
+        $this->app->singleton(LogProfile::class, \Spatie\HttpLogger\LogNonGetRequests::class);
+        $this->app->singleton(LogWriter::class, \Spatie\HttpLogger\DefaultLogWriter::class);
 
         $this->app->bind(IdeasRepositoryInterface::class, IdeasRepository::class);
     }

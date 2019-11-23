@@ -101,11 +101,11 @@ class IdeasRepository extends BaseRepository implements IdeasRepositoryInterface
             if(is_null($idea)) {
                 return false;
             }
-            if(isset($id['user']) && $idea->user_id === $id['user']->id) {
+//            if(isset($id['user']) && $idea->user_id === $id['user']->id) {
                 $idea->delete();
                 return true;
-            }
-            return false;
+//            }
+//            return false;
         }
 
         return false;

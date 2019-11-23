@@ -16,7 +16,7 @@ class HeadersLoggerMiddleware
     public function handle($request, Closure $next)
     {
 
-        \Log::info(json_encode($request->header()));
+        //\Log::info(json_encode($request->header()));
 
         return $next($request);
     }

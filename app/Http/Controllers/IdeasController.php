@@ -98,6 +98,7 @@ class IdeasController extends Controller
 
         if($idea = $this->ideasRepository->newUpdate($params, $idea_id)) {
             \Log::info('Here 111111');
+            \Log::info($idea);
             return response()->json($idea, 200);
         }
 

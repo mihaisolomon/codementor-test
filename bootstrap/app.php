@@ -57,13 +57,13 @@ $app->singleton(
 |
 */
 
- $app->middleware([
-     \Spatie\HttpLogger\Middlewares\HttpLogger::class
- ]);
+// $app->middleware([
+//     \Spatie\HttpLogger\Middlewares\HttpLogger::class
+// ]);
 
- $app->middleware([
-     \App\Http\Middleware\HeadersLoggerMiddleware::class
- ]);
+// $app->middleware([
+//     \App\Http\Middleware\HeadersLoggerMiddleware::class
+// ]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,

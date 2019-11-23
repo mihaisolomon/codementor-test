@@ -14,11 +14,15 @@ use App\Services\Gravatar;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\JWTAuth;
 
 class RegisterController extends Controller
 {
-    public function __construct()
+    protected $JWTAuth;
+
+    public function __construct(JWTAuth $JWTAuth)
     {
+        $this->JWTAuth = $JWTAuth;
     }
 
     public function register(Request $request)
@@ -36,6 +40,13 @@ class RegisterController extends Controller
             'avatar' => Gravatar::avatar($request->get('email'))
         ]);
 
-        return response()->json(['success' => true], 200);
+        if (!$token = $this->JWTAuth->attempt([
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        ])) {
+            return response()->json(['user_not_found'], 401);
+        }
+
+        return response()->json(['jwt' => $token, 'refresh_token' => $token], 201);
     }
 }

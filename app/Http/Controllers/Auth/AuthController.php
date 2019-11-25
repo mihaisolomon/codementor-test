@@ -71,18 +71,14 @@ class AuthController extends Controller
 
     public function refresh(Request $request)
     {
-        $this->validate($request, ['token' => 'required']);
+        $this->validate($request, ['refresh_token' => 'required']);
 
-        $this->JWTAuth->setToken($request->get('token'));
+        $response = $this->jwtService->getRefreshToken($request->get('refresh_token'));
 
-        try {
-            $token = $this->JWTAuth->refresh();
-
-            return response()->json(['jwt' => $token], 200);
-
-        } catch (TokenBlacklistedException $tokenBlacklistedException) {
-            return response()->json(['token_blacklisted'], 401);
+        if(isset($request['user'])) {
+            return response()->json([$request['message']], $response['code']);
         }
 
+        return response()->json(['jwt' => $response['token']]);
     }
 }

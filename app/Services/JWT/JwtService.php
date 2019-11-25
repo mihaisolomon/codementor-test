@@ -109,4 +109,33 @@ class JwtService implements JwtServiceInterface
             'user' => $this->userService->show($credentials->sub)
         ];
     }
+
+    public function getRefreshToken($token)
+    {
+        try {
+            $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+        } catch (ExpiredException $e) {
+            return [
+                'message' => 'Provided token is expired.',
+                'code' => 400
+            ];
+        } catch (\Exception $e) {
+            return [
+                'message' => 'An error while decoding token.',
+                'code' => 400
+            ];
+        }
+
+        $aSub = explode('|', $credentials->sub);
+
+        $user = $this->userService->show($aSub[0]);
+
+        $token = $this->jwt($user);
+
+        return [
+            'user' => $user,
+            'token' => $token
+        ];
+
+    }
 }

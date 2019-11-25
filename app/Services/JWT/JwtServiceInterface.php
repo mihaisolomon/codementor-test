@@ -15,4 +15,6 @@ interface JwtServiceInterface
     public function refreshToken(User $user);
 
     public function getUserInfoByToken($token);
+
+    public function getRefreshToken($token);
 }

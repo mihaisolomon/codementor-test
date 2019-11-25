@@ -8,19 +8,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\JWT\JwtServiceInterface;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function __construct()
+    protected $jwtService;
+
+    public function __construct(JwtServiceInterface $jwtService)
     {
+        $this->jwtService = $jwtService;
     }
 
     public function me(Request $request)
     {
         $user = $request->auth;
 
-
         return $user;
+    }
+
+    public function logout(Request $request)
+    {
+        return response('', 204);
     }
 }

@@ -31,7 +31,10 @@ class JwtService implements JwtServiceInterface
 
         $token = $this->jwt($user);
 
-        return $token;
+        return [
+            'jwt' => $token,
+            'refresh_token' => $this->refreshToken($user)
+        ];
     }
 
     protected function jwt(User $user)
@@ -43,6 +46,16 @@ class JwtService implements JwtServiceInterface
             'exp' => time() + 60 * 60 // Expiration time
         ];
 
+        return JWT::encode($payload, env('JWT_SECRET'));
+    }
+
+    protected function refreshToken(User $user)
+    {
+        $payload = [
+            'iss' => env('APP_NAME'), // Issuer of the token
+            'sub' => "{$user->id}|{$user->email}", // Subject of the token
+            'iat' => time(), // Time when JWT was issued.
+        ];
         return JWT::encode($payload, env('JWT_SECRET'));
     }
 
@@ -62,11 +75,13 @@ class JwtService implements JwtServiceInterface
         } catch (ExpiredException $e) {
             return [
                 'message' => 'Provided token is expired.',
-                'code' => 400];
+                'code' => 400
+            ];
         } catch (\Exception $e) {
             return [
                 'message' => 'An error while decoding token.',
-                'code' => 400];
+                'code' => 400
+            ];
         }
 
         return [

@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repositories\BlackListTokens\BlackListTokensRepository;
+use App\Repositories\BlackListTokens\BlackListTokensRepositoryInterface;
 use App\Repositories\Ideas\IdeasRepository;
 use App\Repositories\Ideas\IdeasRepositoryInterface;
 use App\Repositories\Users\UsersRepository;
 use App\Repositories\Users\UsersRepositoryInterface;
+use App\Services\BlackListTokens\BlackListTokensService;
+use App\Services\BlackListTokens\BlackListTokensServiceInterface;
 use App\Services\JWT\JwtService;
 use App\Services\JWT\JwtServiceInterface;
 use App\Services\Users\UserService;
@@ -36,11 +40,13 @@ class AppServiceProvider extends ServiceProvider
          */
         $this->app->singleton(IdeasRepositoryInterface::class, IdeasRepository::class);
         $this->app->singleton(UsersRepositoryInterface::class, UsersRepository::class);
+        $this->app->singleton(BlackListTokensRepositoryInterface::class, BlackListTokensRepository::class);
 
         /**
          * Services
          */
         $this->app->singleton(UserServiceInterface::class, UserService::class);
         $this->app->singleton(JwtServiceInterface::class, JwtService::class);
+        $this->app->singleton(BlackListTokensServiceInterface::class, BlackListTokensService::class);
     }
 }

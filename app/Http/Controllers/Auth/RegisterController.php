@@ -40,6 +40,6 @@ class RegisterController extends Controller
 
         $token = $this->jwtService->createUser($request);
 
-        return response()->json(['jwt' => $token, 'refresh_token' => $token], 201);
+        return response()->json(['jwt' => $token['jwt'], 'refresh_token' => $token['refresh_token']], 201);
     }
 }

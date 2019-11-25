@@ -16,6 +16,11 @@ $router->post("register", ["uses" => "Auth\RegisterController@register"]);
 $router->post("users", ["uses" => "Auth\RegisterController@register"]);
 
 $router->delete("access-token", [
+    "uses" => "Auth\AuthController@logout",
+    'middleware' => 'jwt.auth.custom'
+]);
+
+$router->delete("access-token", [
     'middleware' => 'jwt.auth.custom',
     "uses" => "ProfileController@logout"
 ]);

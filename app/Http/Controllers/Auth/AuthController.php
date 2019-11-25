@@ -79,6 +79,6 @@ class AuthController extends Controller
             return response()->json([$request['message']], $response['code']);
         }
 
-        return response()->json(['jwt' => $response['token']]);
+        return response()->json(['jwt' => $response['token']], 200);
     }
 }

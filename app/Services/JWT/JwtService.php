@@ -49,7 +49,7 @@ class JwtService implements JwtServiceInterface
         return JWT::encode($payload, env('JWT_SECRET'));
     }
 
-    protected function refreshToken(User $user)
+    public function refreshToken(User $user)
     {
         $payload = [
             'iss' => env('APP_NAME'), // Issuer of the token
@@ -70,6 +70,27 @@ class JwtService implements JwtServiceInterface
             ];
         }
 
+        try {
+            $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+        } catch (ExpiredException $e) {
+            return [
+                'message' => 'Provided token is expired.',
+                'code' => 400
+            ];
+        } catch (\Exception $e) {
+            return [
+                'message' => 'An error while decoding token.',
+                'code' => 400
+            ];
+        }
+
+        return [
+            'user' => $this->userService->show($credentials->sub)
+        ];
+    }
+
+    public function getUserInfoByToken($token)
+    {
         try {
             $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
         } catch (ExpiredException $e) {

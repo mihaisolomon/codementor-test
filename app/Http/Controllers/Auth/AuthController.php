@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\JWT\JwtServiceInterface;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\JWTAuth;
@@ -15,13 +16,17 @@ class AuthController extends Controller
 
     protected $JWTAuth;
 
+    protected $jwtService;
     /**
      * AuthController constructor.
      * @param JWTAuth $JWTAuth
+     * @param JwtServiceInterface $jwtService
      */
-    public function __construct(JWTAuth $JWTAuth)
+    public function __construct(JWTAuth $JWTAuth, JwtServiceInterface $jwtService)
     {
         $this->JWTAuth = $JWTAuth;
+
+        $this->jwtService = $jwtService;
     }
 
     public function login(Request $request)
@@ -47,7 +52,9 @@ class AuthController extends Controller
 
         $this->JWTAuth->setToken($token);
 
-        return response()->json(['jwt' => $token, 'refresh_token' => $token], 200);
+        $tkn = $this->jwtService->refreshToken($this->jwtService->getUserInfoByToken($token)['user']);
+
+        return response()->json(['jwt' => $token, 'refresh_token' => $tkn], 200);
     }
 
     /**
